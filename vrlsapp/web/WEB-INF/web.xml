@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app id="vrls" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <display-name>Virtual Realty Listing Services application</display-name>
+
+
+    <!-- Define servlet filter -->
+    <filter>
+        <filter-name>VrlsFilterServlet</filter-name>
+        <filter-class>biz.vrls.servlet.VrlsServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>VrlsFilterServlet</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Define "action" servlet -->
+    <servlet>    
+        <servlet-name>action</servlet-name>    
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>    
+        <init-param>
+            <param-name>application</param-name>      
+            <param-value>ApplicationResources</param-value>    
+        </init-param>
+        <init-param>      
+            <param-name>config</param-name>
+            <param-value>/WEB-INF/struts-config.xml</param-value>    
+        </init-param>    
+        <init-param>
+              <param-name>debug</param-name>
+              <param-value>2</param-value>   
+        </init-param>   
+         <init-param>
+              <param-name>detail</param-name>
+              <param-value>2</param-value>    
+        </init-param>    
+        <init-param>
+              <param-name>validate</param-name>
+              <param-value>true</param-value>    
+        </init-param>    
+        <load-on-startup>2</load-on-startup>  
+    </servlet>
+    
+    <!-- Map "/action/*" URLs to "action" servlet -->
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>/action/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Welcome file points to index page -->
+    <welcome-file-list>
+            <welcome-file>index.jsp</welcome-file> 
+    </welcome-file-list>  
+    
+    <!-- Taglib definitions -->
+    <jsp-config>
+    
+        <!-- struts-html tags (with EL support) -->
+        <taglib>
+            <taglib-uri>http://jakarta.apache.org/taglibs/struts-html-el</taglib-uri>
+            <taglib-location>/WEB-INF/struts-html-el.tld</taglib-location>  
+        </taglib>  
+    
+        <!-- JSTL core tags with EL support -->
+        <taglib>
+            <taglib-uri>http://jakarta.apache.org/taglibs/c</taglib-uri>
+            <taglib-location>/WEB-INF/c.tld</taglib-location>  
+        </taglib>  
+    
+        <!-- JSTL formatting tags with EL support -->
+        <taglib>
+            <taglib-uri>http://jakarta.apache.org/taglibs/fmt</taglib-uri>
+            <taglib-location>/WEB-INF/fmt.tld</taglib-location>  
+        </taglib>  
+    
+        <!-- JSTL SQL tags with EL support -->
+        <taglib>
+            <taglib-uri>http://jakarta.apache.org/taglibs/sql</taglib-uri>
+            <taglib-location>/WEB-INF/sql.tld</taglib-location>  
+        </taglib>  
+    
+        <!-- JSTL XML tags with EL support -->
+        <taglib>
+            <taglib-uri>http://jakarta.apache.org/taglibs/x</taglib-uri>
+            <taglib-location>/WEB-INF/x.tld</taglib-location>  
+        </taglib>  
+    
+    </jsp-config>
+</web-app>

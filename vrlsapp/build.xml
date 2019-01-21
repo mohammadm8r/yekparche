@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<project name="vrls" default="compile" basedir=".">
+    <property environment="env" />
+    <condition property="tomcat-home" value="${env.TOMCAT_HOME}">
+        <isset property="${env.TOMCAT_HOME}" />
+    </condition>
+    <condition property="tomcat-home" value="/usr/local/tomcat">
+        <os family="unix" />
+    </condition>
+    <condition property="tomcat-home" value="C:/Program Files/Apache/Tomcat5.5">
+        <os family="windows" />
+    </condition>
+    <property name="webapp-dir" location="${tomcat-home}/webapps" />
+    <property name="webinf" location="web/WEB-INF" />
+    <property name="src" location="src" />
+    <property name="resources" location="resources" />
+    <property name="classes" location="${webinf}/classes" />
+    <property name="lib" location="${webinf}/lib" />
+    <property name="compile-lib" location="lib" />
+    
+    <path id="project.classpath">
+        <fileset dir="${lib}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="compile.classpath">
+        <path refid="project.classpath" />
+        <fileset dir="${compile-lib}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+    
+    <target name="init">
+        <echo>Creating required directories...</echo>
+        <mkdir dir="${webinf}" />
+        <mkdir dir="${classes}" />
+        <mkdir dir="${lib}" />
+        <copy file="${resources}/ApplicationResources.properties" 
+            todir="${classes}" />
+        <copy file="${resources}/log4j.properties" 
+            todir="${classes}" />
+        <pathconvert pathsep=";" property="compile.classpath.string" refid="compile.classpath" />
+    </target>
+    
+    <target name="compile" depends="init">
+        <echo>Compiling Java source files...</echo>
+        <echo>CLASSPATH = ${compile.classpath.string}</echo>
+        <javac srcdir="${src}" destdir="${classes}" 
+                deprecation="on" debug="on">
+            <classpath refid="compile.classpath" />
+        </javac>
+    </target>
+
+    <target name="clean" depends="delete-classes, delete-war, delete-zip" />
+
+    <target name="delete-classes">
+        <echo>Cleaning classes directory...</echo>
+        <delete dir="${classes}" />
+    </target>
+    
+    <target name="delete-war">
+        <echo>Deleting WAR file...</echo>
+        <delete file="vrls.war" />
+    </target>
+
+    <target name="delete-zip">
+        <echo>Deleting zip file...</echo>
+        <delete file="vrlsapp.zip" />
+    </target>
+
+    <target name="compile-clean" depends="clean, init, compile" />
+
+    <target name="war" depends="compile, delete-war">
+        <echo>Building WAR file...</echo>
+        <jar jarfile="vrls.war" basedir="web" />
+    </target>
+
+    <target name="zip" depends="clean">
+        <echo>Building zip file...</echo>
+        <zip destfile="vrlsapp.zip">
+           <zipfileset dir="." includes="**" prefix="vrlsapp"
+            excludes="web/WEB-INF/classes/**, **/*.war, **/*.class, **/*.zip" />
+        </zip>
+    </target>
+
+    <target name="deploy" depends="war">
+        <echo>Deploying war file...</echo>
+        <echo>Deleting webapp directory...</echo>
+        <delete dir="${webapp-dir}/vrls" />
+        <echo>Copying vrls.war to ${webapp-dir}...</echo>
+        <copy file="vrls.war" todir="${webapp-dir}" overwrite="true" />
+    </target>
+
+</project>
+

@@ -1,0 +1,62 @@
+.navbar {
+    color: #ffffff;
+    font-size: 8pt;
+    font-family: arial, helvetica, sans serif;
+    white-space: pre;
+    text-align: right;
+    float: left;
+    padding-right: 15px;
+    border-right: 3px solid white;
+    width: 75px;
+    height: 90%;
+    margin-right: 15px;
+}
+
+.text {
+    color: #ffffff;
+    font-size: 9pt;
+    font-family: arial, helvetica, sans serif;
+    margin-right: 20%;
+}
+
+.messages {
+    background-color: #dddddd;
+    color: black;
+    font-family: arial, helvetica, sans serif;
+    font-size: 9pt;
+    padding: 5px 5px 5px 5px;
+    margin-left: 100px;
+}
+
+.listingTitle {
+    font-size: 12pt;
+    font-weight: bold
+}
+
+h3 {
+    color: #ffffff;
+    font-size: 11pt;
+    font-family: arial, helvetica, sans serif;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+a {
+    color: #ffff66 ;
+    text-decoration: none;
+    padding: 2px, 2px, 2px, 2px;
+}
+
+a:hover {
+    color: #ffff99 ;
+    background-color: black ;
+    text-decoration: underline;
+}
+
+body {
+    background-color: #999999
+}
+
+table {
+    padding: 2px;
+}

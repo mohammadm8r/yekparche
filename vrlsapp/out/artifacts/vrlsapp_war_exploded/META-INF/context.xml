@@ -1,0 +1,12 @@
+<Context path="/vrls">
+    <Resource name="jdbc/vrls"
+              type="javax.sql.DataSource"
+              password="waabook"
+              driverClassName="com.mysql.jdbc.Driver"
+              maxIdle="2"
+              maxWait="5000"
+              validationQuery="SELECT * FROM VRLS_XREF_LISTING_TYPE"
+              username="waabook"
+              url="jdbc:mysql://localhost:3306/test?autoReconnect=true&amp;jdbcCompliantTruncation=false"
+              maxActive="4" />
+</Context>

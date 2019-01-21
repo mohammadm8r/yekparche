@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+   
+    http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<!DOCTYPE form-validation PUBLIC
+     "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.3.0//EN"
+     "http://jakarta.apache.org/commons/dtds/validator_1_3_0.dtd">
+
+<form-validation>
+
+    <formset>
+    
+        <constant>
+            <constant-name>loginMask</constant-name>
+            <constant-value>^([a-zA-Z][0-9a-zA-Z]{3,})?$</constant-value>
+        </constant>
+        
+        <constant>
+            <constant-name>passwordMask</constant-name>
+            <constant-value>^[0-9a-zA-Z]{4,}$</constant-value>
+        </constant>
+        
+        <constant>
+            <constant-name>postalCodeMaskCanada</constant-name>
+            <constant-value>^CA\:\w\d\w\s\d\w\d$</constant-value>
+        </constant>
+
+        <constant>
+            <constant-name>postalCodeMaskUS</constant-name>
+            <constant-value>^US\:\d{5}(\-\d+)*$</constant-value>
+        </constant>
+        
+        <constant>
+            <constant-name>postalCodeMaskOther</constant-name>
+            <constant-value>^Other$</constant-value>
+        </constant>
+        
+        <constant>
+            <constant-name>phoneMask</constant-name>
+            <constant-value>^(\+\d{1,3}\-?)?(\(\d{1,4}\))?[0-9\-]{4,20}\d$</constant-value>
+        </constant>
+        
+        <form name="customerLoginForm">
+            <field property="username" depends="required">
+                    <arg key="error.login.username"/>
+            </field>
+            <field property="password" depends="required">
+                    <arg key="error.login.password"/>
+            </field>
+        </form>
+
+		<form name="customerContactForm">
+            <field property="emailAddress" depends="required,email">
+                <arg key="error.contact.email"/>
+            </field>
+            <field property="subject" depends="required">
+                <arg key="error.contact.subject"/>
+            </field>
+            <field property="body" depends="required">
+                <arg key="error.contact.body"/>
+            </field>
+        </form>
+        
+        <form name="customerProfileForm">
+            <field property="login" depends="mask">
+                <msg name="mask" key="error.profile.masklogin"/>
+                <arg key="error.profile.login"/>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${loginMask}</var-value>
+                </var>
+            </field>
+            <field property="password" depends="mask">
+                <msg name="mask" key="error.profile.maskpass"/>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${passwordMask}</var-value>
+                </var>
+            </field>
+            <field property="passwordConfirm" depends="validwhen">
+			    <arg key="error.profile.passwordMatch"/>
+				    <var>
+					    <var-name>test</var-name>
+					    <var-value>(*this* == password)</var-value>
+				    </var>
+		    </field>
+		    <field property="firstName" depends="required">
+                <arg key="error.profile.firstName"/>
+            </field>
+            <field property="lastName" depends="required">
+                <arg key="error.profile.lastName"/>
+            </field>
+            <field property="address1" depends="required">
+                <arg key="error.profile.address1"/>
+            </field>
+            <field property="city" depends="required">
+                <arg key="error.profile.city"/>
+            </field>
+            <field property="stateProvinceCode" depends="validwhen">
+                <msg name="validwhen" key="error.profile.stateProvinceCode"/>
+                <arg key="error.profile.stateProvinceCode"/>
+                    <var>
+					    <var-name>test</var-name>
+					    <var-value>((*this* != null) or ((countryCode != 'US') and (countryCode != 'CA')))</var-value>
+				    </var>
+            </field>
+            <field property="postalCode" depends="required">
+                <arg key="error.profile.postalCode" />            
+            </field>
+            <field property="countryPostal" depends="mask">
+                <msg name="mask" key="error.profile.maskzip"/>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${postalCodeMaskUS}|${postalCodeMaskCanada}|${postalCodeMaskOther}</var-value>
+                </var>
+            </field>
+            <field property="countryCode" depends="required">
+                <msg name="required" key="error.profile.countryCode"/>
+            </field>
+            <field property="emailAddress" depends="required,email">
+                <arg key="error.profile.emailAddress"/>
+            </field>
+            <field property="phoneNumber" depends="required,mask">
+                <msg name="mask" key="error.profile.maskphone"/>
+                <arg key="error.profile.phoneNumber"/>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${phoneMask}</var-value>
+                </var>
+            </field>
+        </form>
+        
+    </formset>
+
+</form-validation>

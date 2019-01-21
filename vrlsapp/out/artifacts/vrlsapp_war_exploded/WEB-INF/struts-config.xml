@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="customerLoginForm" type="biz.vrls.struts.form.CustomerLoginForm"/>
+		<form-bean name="customerProfileForm" type="biz.vrls.struts.form.CustomerProfileForm"/>
+		<form-bean name="customerSearchForm" type="biz.vrls.struts.form.CustomerSearchForm"/>
+		<form-bean name="customerContactForm" type="biz.vrls.struts.form.CustomerContactForm"/>
+		<form-bean name="adminLoginForm" type="biz.vrls.struts.form.AdminLoginForm"/>
+		<form-bean name="listingForm" type="biz.vrls.struts.form.ListingForm"/>
+		<form-bean name="partnerDataForm" type="biz.vrls.struts.form.PartnerDataForm"/>
+	</form-beans>
+	<global-forwards>
+		<forward name="notauthorized" path="/action/login" redirect="true"/>
+		<forward name="authreject" path="/pages/main.jsp?name=authfailure"/>
+	</global-forwards>
+	<action-mappings>
+		<!-- /home: Always forwards to home page -->
+		<action path="/home" forward="/pages/main.jsp?name=home"/>
+		<!-- /login: Forwards to login.jsp on initial request,
+            reroutes to whatever action user was about to do on success,
+            redisplays login.jsp (with messages) on failure -->
+		<action path="/login" type="biz.vrls.struts.action.CustomerLoginAction" name="customerLoginForm" scope="request" input="failure" validate="true">
+			<forward name="failure" path="/pages/main.jsp?name=login"/>
+		</action>
+		<action path="/agency" type="biz.vrls.struts.action.CustomerLoginAction" name="customerLoginForm" scope="request" input="failure" validate="true">
+			<forward name="failure" path="/pages/main.jsp?name=agency"/>
+		</action>
+		<!-- /authcheck: If user is signed on, forward to logout page,
+            reroutes to whatever action user was about to do on success,
+            redisplays login.jsp (with messages) on failure -->
+		<action path="/authcheck" type="biz.vrls.struts.action.CustomerAuthCheckAction">
+			<forward name="logout" path="/pages/main.jsp?name=logout"/>
+			<forward name="login" path="/action/login" redirect="true"/>
+			<!--<forward name="agency" path="/action/agency"/>-->
+		</action>
+		<!-- /profile: Forwards to profile.jsp on initial request,
+                reroutes to whatever action user was about to do on success,
+                redisplays profile.jsp (with messages) on failure -->
+		<action path="/profile" type="biz.vrls.struts.action.CustomerProfileAction" name="customerProfileForm" scope="request" input="failure" validate="true">
+			<forward name="success" path="/pages/main.jsp?name=profileConfirm"/>
+			<forward name="failure" path="/pages/main.jsp?name=profile"/>
+		</action>
+		<!-- /search: Forwards to search.jsp on initial request,
+                displays results page if multiple results found,
+                displays details page (or tries to) if one result found
+                redisplays search.jsp (with messages) on failure/no results found -->
+		<action path="/search" type="biz.vrls.struts.action.CustomerSearchAction" name="customerSearchForm" scope="request" input="failure" validate="true">
+			<forward name="many" path="/action/results" redirect="true"/>
+			<forward name="one" path="/action/details" redirect="true"/>
+			<forward name="failure" path="/pages/main.jsp?name=search"/>
+		</action>
+		<!-- /results: Forwards to results.jsp to display tabular results -->
+		<action path="/results" forward="/pages/main.jsp?name=results"/>
+		<!-- /details: If user not signed in, store intended action
+                but forward to login, otherwise forward to details.jsp page -->
+		<action path="/details" type="biz.vrls.struts.action.CustomerSearchDetailsAction" input="failure">
+			<forward name="success" path="/pages/main.jsp?name=details"/>
+			<forward name="failure" path="/pages/main.jsp?name=search"/>
+		</action>
+		<!-- /images: If user not signed in, store intended action
+                but forward to login, otherwise forward to image.jsp page -->
+		<action path="/images" type="biz.vrls.struts.action.ImageDisplayAction"/>
+		<!-- /contact: Always route to contact page -->
+		<action path="/contact" type="biz.vrls.struts.action.CustomerContactAction" name="customerContactForm" scope="request" input="failure" validate="true">
+			<forward name="failure" path="/pages/main.jsp?name=contact"/>
+			<forward name="success" path="/pages/main.jsp?name=emailConfirm"/>
+		</action>
+	</action-mappings>
+	<controller>
+        <set-property property="inputForward" value="true" />
+    </controller>
+	<message-resources parameter="ApplicationResources"/>
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/org/apache/struts/validator/validator-rules.xml,/WEB-INF/validation.xml"/>
+	</plug-in>
+</struts-config>

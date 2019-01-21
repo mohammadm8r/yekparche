@@ -1,0 +1,325 @@
+<html>
+<head>
+<!-- link rel="stylesheet" href="waappp.css" type="text/css"-->
+<title>Webappbuilders.com - Web Application Architecture: Principles, Protocols, and Practices</title>
+<style type="text/css">
+    body {
+        background-color: #b0b0b0;
+        margin: 0 auto;
+        padding: 0 ;
+        font-family: arial;
+        font-size: 8pt;
+        text-align: center;
+    }
+
+	li {
+		margin-top: 10px;
+	}
+
+	blockquote {
+		background-color: #e0e0e0;
+		padding: 8px;
+	}
+
+	pre {
+	    overflow: auto;
+	}
+
+    #surround {
+        border: 3px solid #2b2b2b;
+        width: 900px;
+        margin: 0 auto;
+    }
+        
+    #header {
+        margin: 0 auto;
+        display: block;
+        background-color: #2b2b2b;
+        text-align: left ;
+        vertical-align: absmiddle;
+    }
+    
+    #navbar {
+        margin: 0 auto;
+        padding-bottom: 2px;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 2px;
+        padding-bottom: 3px;
+        display: block;
+        background-color: #2b2b2b;
+        color: white;
+        text-align: center;
+    }
+    
+    .navbarTab {
+        padding: 1px;
+        display: inline;
+        text-align: center;
+        font-family: century gothic, arial, helvetica ;
+        font-weight: bold;
+        font-size: 10pt;
+        border: 1px solid white;
+    }
+    .navbarTab a {
+        text-decoration: none;
+        color: white;
+    }
+    .navbarTab a:hover {
+        color: #fd7f22
+    }
+    
+    .navbarTabActive {
+        background-color: #fd7f22;
+        color: black ;
+    }
+    .navbarTabActive a {
+        color: black;
+    }    
+    .navbarTabActive a:hover {
+        color: black ;
+    }
+    
+    #container {
+        margin: 0 auto;
+        padding-bottom: 8px;
+        padding-left: 0;
+        padding-right: 0;
+        display: block;
+        background-color: #666666;
+        text-align: left;
+        color: black;
+        font-family: arial;
+        font-size: 8pt;
+    }
+    
+    #container a {
+        color: #db5d00; 
+        text-decoration: none;
+    }
+    #container a:hover {
+        background-color: #ffffaa;
+        color: #d00000;
+    }
+    
+    #box {
+        margin: 0 auto;
+        padding: 50px;
+        text-align: left ;
+    }
+    #box table tr td {
+        font-family: arial;
+        font-size: 9pt;
+    }
+    .downloadLink {
+        font-style: normal;
+        font-weight: normal;
+        white-space: nowrap;
+        text-align: center;
+        padding-top: 8px
+    }
+    .userEntered {
+        font-weight: bold
+    }
+    .leadin {
+		font-weight: bold;
+		text-decoration: underline;
+	}
+</style>   
+</head>
+<body>
+<div style="width: 100%; text-align: center;">
+<div id="surround">
+<div id="header">
+    <table width="100%">
+        <tr>
+            <td style="color: #db5d00; font-weight: bold; font-size: 12pt"><img src="http://www.webappbuilders.com/images/wabcom6-openspace.png" alt="&nbsp;Webappbuilders.com" title="&nbsp;Webappbuilders.com" /></td>
+            <td style="vertical-align: middle; text-align: right; padding-right: 25px; padding-top: 8px; color: white; font-weight: bold">
+            INSTRUCTIONS FOR<br/>DOWNLOADING AND INSTALLING</br>THE SAMPLE APPLICATION
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="container">
+
+<div id="box">
+
+<div style="background-color: white; padding: 20px; font-size: 9pt;">
+<h3>Instructions for Downloading and Installing the Sample Application</h3>
+These instructions are geared for installation in a UNIX, Linux, or Macintosh environment. Instructions for Windows systems can be found <a href="readme-windows.html">here</a>. (Macintosh users running Mac OS X 10.5 should note that the JDK and Ant are already installed.)
+<ol>
+<li><span class="leadin">Download the distribution package for this application.</span> Unzip it into a directory of your choosing.
+	<blockquote>For purposes of this document, we will assume that you are on a UNIX, Linux, or Macintosh platform and have already downloaded this package and extracted its contents into a folder named <tt>myprojects</tt> in your home directory. If not, the link for downloading is found below.
+
+	<div class="downloadLink">[ <a href="http://www.webappbuilders.com/?content=downloads" target="download">download the VRLS application distribution package</a> ]</div></blockquote>
+</li>    
+
+<li><span class="leadin">Install the Java Development Kit (JDK) on your system.</span> This is needed both to compile the application and to support the Web application server's servlet and JSP engines.
+
+	<blockquote>We recommend JDK version 1.5 or version 1.6 for this application. Both versions are available on Sun's Web site.
+
+	<div class="downloadLink">[ <a
+	href="http://java.sun.com/javase/downloads/index_jdk5.jsp" target="download">download JDK 1.5</a> ]
+	&nbsp; [ <a href="http://java.sun.com/j2se/downloads.html" target="download">download JDK 1.6</a> ]</div></blockquote>
+</li>    
+
+<li><span class="leadin">Install and configure Apache's Ant tool which is used to build the application.</span>
+
+	<blockquote>We will assume that you have installed Ant into the <tt>/usr/local/ant/</tt> folder.
+
+	<div class="downloadLink">[ <a href="http://ant.apache.org/bindownload.cgi" target="download">download Ant</a> ]</div></blockquote>
+</li>    
+
+<li><span class="leadin">Install and configure your Web application server software.</span> You must use an application server (or "Web container") that includes or supports the usage of a servlet engine (Java Servlet API 2.4 or better) and Java Server Pages (JSP 2.0 or better). It should also support JNDI lookup of configured JDBC DataSources.
+
+	<blockquote>If you do not already have a J2EE Web container installed, we recommend
+	Apache Tomcat. It is open source, freely available, and supports
+	all the functionality required by the application. Either version 5.5 or
+	version 6 is recommended.
+
+	<br/><br/>Remember that Tomcat defaults to using port 8080, so either include
+	the port number in your localhost URLs (e.g., <tt>http://localhost:8080</tt>)
+	or change Tomcat's configuration to use port 80 for HTTP requests.
+	(Read the Tomcat documentation for instructions on how to do this.)
+	<div class="downloadLink">[ <a
+	href="http://tomcat.apache.org/download-55.cgi" target="download">download Tomcat 5.5</a> ]
+	&nbsp; [ <a
+	href="http://tomcat.apache.org/download-60.cgi" target="download">download Tomcat 6</a>]</div></blockquote>
+</li>    
+
+<li><span class="leadin">Install and configure your database management system (DBMS).</span> The data model
+for this application is persisted in a relational database, thus a working
+database is required. You will also need a JDBC driver appropriate for the DBMS that you choose.
+
+    <blockquote>If you do not already have a DBMS installed, we recommend MySQL.
+	Like Apache Tomcat, it is open source, freely available, and
+	supports the functionality required by the application. In fact,
+	the application's data access services were written under the
+	assumption that a simple DBMS like MySQL (which does not support
+	triggers or stored procedures or automated referential integrity)
+	would be used. Version 5.0 is recommended. The JDBC driver for MySQL is included in the download for the DBMS itself, but it is also accessible separately if desired.
+	
+	<div class="downloadLink">[ <a
+	href="http://dev.mysql.com/downloads/mysql/5.0.html" target="download">download MySQL 5.0</a> ] &nbsp; [ <a
+	href="http://dev.mysql.com/downloads/connector/j/5.0.html" target="download">download MySQL JDBC driver</a> ]</div></blockquote>
+</li>    
+
+<li><span class="leadin">Execute the SQL queries that create and populate the database tables used by the application.</span> This process varies depending on which DBMS you are using, so consult the documentation associated with your DBMS software for appropriate instructions. Assuming here that you installed MySQL into the directory named <tt>/usr/local/mysql/</tt>, enter the following commands to execute these scripts.
+
+<blockquote><pre>$ <span class="userEntered">cd /usr/local/mysql/bin</span>
+$ <span class="userEntered">mysql -u root -p</span>
+Enter password: <span class="userEntered">********</span>
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> <span class="userEntered">use test</span>
+Database changed
+mysql> <span class="userEntered">source ~/myprojects/vrlsapp/sql/dbschema.sql</span>
+	...
+mysql> <span class="userEntered">source ~/myprojects/vrlsapp/sql/populate.sql</span>
+	...
+mysql> <span class="userEntered">source ~/myprojects/vrlsapp/sql/mysqlgrant.sql</span>
+	...
+</pre></blockquote>
+	The <tt>dbschema.sql</tt> and <tt>populate.sql</tt> query files in the above files may be imported into SQL processing tools associated with other DBMSs to create and populate the application tables if necessary. The <tt>mysqlgrant.sql</tt> query file performs SQL grant statements needed if you are using a newly installed MySQL installation, as shown below:
+<blockquote><pre>grant all on test.* to waabook identified by 'waabook' ;
+grant all on test.* to waabook@localhost identified by 'waabook' ;</pre></blockquote>
+</li>    
+
+<li><span class="leadin">Define the following environment variables.</span> (Methods for doing this vary between Windows, Linux, and Macintosh systems.)
+
+	<blockquote><dl>
+	<dt><B>ANT_HOME</B> - the directory in which Ant was installed</dt>
+		<dd>e.g., <tt>/usr/local/ant</tt></dd>
+	<dt><B>JAVA_HOME</B> - the directory in which the JDK was installed</dt>
+		<dd>e.g., <tt>/usr/local/jdk/</tt></dd>
+	<dt><B>TOMCAT_HOME</B> - the directory in which Tomcat was installed (if you are using Tomcat)</dt>
+		<dd>e.g., <tt>/usr/local/tomcat/</tt></dd>
+	</dl></blockquote>
+</li>    
+
+
+<li>If you are using Tomcat, <span class="leadin">copy the JAR file containing your DBMS's JDBC driver files into the <tt>common/lib</tt> directory under TOMCAT_HOME</span>.
+
+	<blockquote><pre>$ <span class="userEntered">cd</span> <i>directory-containing-driver-file</i>
+$ <span class="userEntered">cp mysql-connector-java-5.0.5-bin.jar $TOMCAT_HOME/common/lib</span>
+	</pre>
+If you are using a DBMS other than MySQL, read the documentation for your DBMS to determine where you can find the appropriate
+	drivers.<br/><br/>If you are using a Web container other than Tomcat, follow the instructions regarding where JDBC drivers used for JNDI-defined DataSources belong.</blockquote>
+</li>    
+
+<li><span class="leadin">Define a <tt>DataSource</tt> for the application to use within your application server environment.</span> This process varies depending on which Web container software you are using, so we will concentrate here on Tomcat. Consult the documentation associated with your application server software for appropriate instructions.
+	<blockquote>In older versions of Tomcat, the most direct way to define the DataSource was to edit the <tt>server.xml</tt> file found in the
+<tt>%TOMCAT_HOME%\conf</tt> directory, adding a DataSource definition to the Tomcat configuration manually.
+<pre>&lt;Context path="/vrls">
+    &lt;Resource name="jdbc/vrls"
+              type="javax.sql.DataSource"
+              password="waabook"
+              driverClassName="com.mysql.jdbc.Driver"
+              maxIdle="2"
+              maxWait="5000"
+              validationQuery="select * from vrls_xref_listing_type"
+              username="waabook"
+              url="jdbc:mysql://localhost:3306/test?autoReconnect=true&amp;amp;jdbcCompliantTruncation=false"
+              maxActive="4" />
+&lt;/Context>
+</pre>
+    Tomcat 5.5 and 6.x let you place a <tt>context.xml</tt> file containing the above text in a WAR file's <tt>META-INF</tt> directory. This lets you deploy applications with their own customized resource definitions without having to modify the server's base configuration files. We include a <tt>context.xml</tt> in the application distribution and place it in the appropriate place in the WAR file as part of the build process. If you are using a different application server, a different DBMS, or different connection credentials, you will need to modify this file before the application is built and deployed.</blockquote>
+</li>    
+
+<li><span class="leadin">Build the application using Ant.</span> This is accomplished using a command line interface (shell/terminal window on UNIX/Linux, or DOS prompt in Windows), entering
+the directory into which you extracted the contents of the application's distribution package, and running Ant.
+
+<blockquote><pre>$ <span class="userEntered">cd ~/myprojects/vrlsapp</span>
+$ <span class="userEntered">ant</span></pre></blockquote>
+
+This will cause Ant to look for the <tt>build.xml</tt> file found in that directory, and use the directives in that file to invoke the Java compiler (<tt>%JAVA_HOME%\bin\javac</tt>) in order to build the application binaries.
+<br/><br/>Once the code has successfully compiled, build the web archive
+(WAR) file that will be deployed. This is accomplished by running Ant from
+the command line with an argument ("war") that tells it to build the WAR
+file.
+
+	<blockquote><pre>$ <span class="userEntered">ant war</span></pre></blockquote>
+</li>    
+
+<li><span class="leadin">Deploy the WAR file.</span> This process varies depending on which
+Web container you are using, so we will concentrate here on Tomcat.
+Consult the documentation for your Web container for specific instructions.
+<br/><br/>In general, WAR files can be deployed to most J2EE Web containers
+by "dropping" them in the appropriate directory. If the container is
+properly configured, it will automatically expand the WAR file's contents
+into an appropriate place for deployment within the container.
+<br/><br/>Tomcat is
+no exception: dropping the WAR file into the <tt>webapps</tt> directory under the
+Tomcat root, even while Tomcat is running, will result in the WAR file
+being expanded and deployed. However, to ensure proper deployment, we encourage you to stop Tomcat and clear out the "vrls" directory (if it exists) before deploying the WAR file, and to restart Tomcat when you are done deploying.
+<blockquote><pre>$ <span class="userEntered">sudo $TOMCAT_HOME/bin/shutdown.sh</span>
+<br/>$ <span class="userEntered">sudo rm -rf $TOMCAT_HOME/webapps/vrls</span>
+<br/>$ <span class="userEntered">sudo cp vrls.war $TOMCAT_HOME/webapps/</span>
+<br/>$ <span class="userEntered">sudo $TOMCAT_HOME/bin/startup.sh</span></pre></blockquote>
+We provide an Ant target in the <code>build.xml</code> file called "deploy", which should work if you are using Tomcat 5.5 and installed Tomcat 5.5 in the default location. If you have changed any of the defaults, you may need to edit the <code>build.xml</code> file to reflect those changes. If you are unsure of how to do this, go through the list of manual steps described above. If you do use this target, be sure to run it using "sudo".
+<blockquote><pre>$ <span class="userEntered">sudo ant deploy</span></pre></blockquote>
+</li>    
+
+<li><span class="leadin">Open the application in your web browser.</span> If necessary, start or restart your application server. (Live deployment in Tomcat makes restart unnecessary as Tomcat will expand and deploy the WAR file if it is dropped into the <tt>webapps</tt> directory while Tomcat is running.) Then direct your web browser to <tt>http://localhost:8080/vrls</tt>, which will display a page describing the book and the associated application. Click on one of the "Try the app" links to use the application.
+</li>    
+</ol>
+<h3 style="page-break-before: always">Debugging Tips</h3>
+If you should experience problems getting the application to run:
+<ol>
+<li>Check your server error logs (found in <tt>$TOMCAT_HOME/logs/</tt>) if you are having trouble connecting to the database. This may give you insight into what the problem is.
+</li>    
+<li>If database connectivity problems persist in Tomcat, remove the <tt>"validationQuery"</tt> line in the <tt>context.xml</tt> file and then rebuild and redeploy the application. (Note that this validation query will only work once the application database tables have been populated, so make sure you have executed all the provided SQL scripts before attempting to connect to the database.)
+</li>    
+<li>When all else fails, go to <a href="http://www.google.com/" target="google">Google</a> and search for solutions to the problems you are seeing. Others have probably faced similar problems. For example, searching on <tt>"cannot load JDBC driver"</tt> plus <tt>"tomcat"</tt> and <tt>"mysql"</tt> recently helped us solve a nagging problem (that turned out to be a simple configuration error on our part).
+</li>
+<li>
+Finally, feel free to contact the authors if you have any questions or problems regarding the application.
+</li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>
