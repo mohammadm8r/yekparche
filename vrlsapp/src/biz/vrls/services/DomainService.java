@@ -62,6 +62,9 @@ public class DomainService {
     public static final String SQL_CUSTOMER_SELECT_BY_LOGIN =
         "select * from vrls_customer_profile_data where cust_login = ?" ;
 
+    public static final String SQL_CUSTOMER_COUNT =
+        "select * from vrls_customer_profile_data where cust_login = ?" ;
+
     public static final String SQL_CUSTOMER_UPDATE =
         "update vrls_customer_profile_data" +
         "   set cust_password_hash       = ? " +
@@ -235,6 +238,48 @@ public class DomainService {
             }
         }
         return customer ;
+    }
+    public int usernameExistence(String p_customerLogin) throws ServletException {
+        DataAccessService das = DataAccessService.getInstance() ;
+        Connection conn = null ;
+        PreparedStatement ps = null ;
+        ResultSet rs = null ;
+        String count ="0";
+
+        try {
+            conn = das.getConnection() ;
+            ps = conn.prepareStatement(SQL_CUSTOMER_COUNT) ;
+            ps.setString(1,p_customerLogin) ;
+            System.out.println(p_customerLogin);
+            rs = ps.executeQuery() ;
+            if (rs.next()) {
+                count  = rs.getString(1) ;
+                System.out.println(count);
+            }
+        }
+        catch (SQLException sqle) {
+            loggingService.error("Could not retrieve CustomerProfile: " + sqle) ;
+            throw new ServletException("Could not retrieve CustomerProfile.", sqle) ;
+        }
+        finally {
+            try {
+                if (rs != null) {
+                    rs.close() ;
+                }
+                if (ps != null) {
+                    ps.close() ;
+                }
+                if (conn != null) {
+                    loggingService.info("Closing connection after retrieve Partner.") ;
+                    conn.close() ;
+                    loggingService.info("Connection closed.") ;
+                }
+            }
+            catch (SQLException sqle2) {
+                loggingService.error("Cleanup error during retrieve CustomerProfile: " + sqle2) ;
+            }
+        }
+        return Integer.parseInt(count) ;
     }
 
     public boolean persistCustomerProfile(CustomerProfile p_customer) throws ServletException {

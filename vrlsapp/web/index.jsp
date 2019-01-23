@@ -110,7 +110,7 @@ code, tt {
             &nbsp;&nbsp;&nbsp;
             [<html:link href="${pageScope.home}?partner=rrr">&nbsp;using Rosen Realty co-branding&nbsp;</html:link>]</div>
             &nbsp;&nbsp;&nbsp;
-            [<html:link href="action/agency?partner=default">&nbsp;using Rosen Realty co-branding&nbsp;</html:link>]</div>
+            [<html:link href="action/agency?partner=default">&nbsp;Agency&nbsp;</html:link>]</div>
             <br/>
             <div style="text-align: center">[<a href="mailto:yazdimeister@gmail.com">&nbsp;ask for more info by e-mail&nbsp;</a>]
             &nbsp;&nbsp;&nbsp;
