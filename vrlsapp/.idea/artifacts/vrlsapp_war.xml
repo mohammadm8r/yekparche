@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="vrlsapp:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/vrlsapp_war</output-path>
+    <root id="archive" name="vrlsapp_war.war">
+      <element id="artifact" artifact-name="vrlsapp:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -112,10 +112,7 @@
         <c:set scope="page" var="submitLabel" value=" Update profile "/>
     </c:otherwise>
     </c:choose>
-    <tr>var user_input = document.querySelector("[name^=login]");
-        user_input.onblur  = function(){
-        alert('asdf')
-        }
+    <tr>
         <td colspan="2" style="text-align: center">
             <br/><html:submit value="${pageScope.submitLabel}"/> &nbsp;
             <html:reset value=" Reset values "/>
@@ -128,15 +125,17 @@
         var user_input = document.querySelector("[name^=login]");
         user_input.onblur  = function(){
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://reqres.in/api/users?page=2');
+            xhr.open('GET', 'http://localhost:8088/vrlsapp_war_exploded/action/usernameDuplicate?username='+document.querySelector("[name^=login]").value);
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    document.querySelector(".user-validation.success").style.display = 'inline-block';
-                    document.querySelector(".user-validation.error").style.display = 'none';
-                }
-                else {
-                    document.querySelector(".user-validation.error").style.display = 'inline-block';
-                    document.querySelector(".user-validation.success").style.display = 'none';
+                    if(xhr.responseText == 'OK'){
+                        document.querySelector(".user-validation.success").style.display = 'inline-block';
+                        document.querySelector(".user-validation.error").style.display = 'none';
+                    }
+                    else{
+                        document.querySelector(".user-validation.success").style.display = 'none';
+                        document.querySelector(".user-validation.error").style.display = 'inline-block';
+                    }
                 }
             };
             xhr.send();
