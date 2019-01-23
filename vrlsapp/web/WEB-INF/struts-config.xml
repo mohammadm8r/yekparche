@@ -67,6 +67,9 @@
 			<forward name="failure" path="/pages/main.jsp?name=contact"/>
 			<forward name="success" path="/pages/main.jsp?name=emailConfirm"/>
 		</action>
+        <action path="/usernameDuplicate" type="biz.vrls.struts.action.CustomerDuplicateCheckAction">
+			<forward name="success" path="/pages/main.jsp?name=emailConfirm"/>
+		</action>
 	</action-mappings>
 	<controller>
         <set-property property="inputForward" value="true" />
